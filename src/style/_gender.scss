@@ -1,0 +1,45 @@
+.gender {
+  display: flex;
+
+  &__item {
+    flex-basis: 50%;
+    font-size: 18px;
+    line-height: 22px;
+    text-transform: uppercase;
+    text-align: center;
+
+    @include tablet {
+      font-size: 16px;
+      line-height: 19px;
+    }
+
+    @include mobile {
+      font-size: 14px;
+      line-height: 17px;
+    }
+  }
+
+  &__link {
+    display: block;
+    border-bottom: 1px solid $color-gray-light;
+    transition: color 0.36s ease-in-out;
+    padding: 16px 0;
+
+    @include tablet {
+      padding: 12px 0;
+    }
+  
+    @include mobile {
+      padding: 8px 0;
+    }
+
+    &:hover {
+      color: $color-gray;
+    }
+
+    &_active {
+      border-bottom-color: $color-main;
+      pointer-events: none;
+    }
+  }
+}

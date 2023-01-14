@@ -1,0 +1,32 @@
+.navigation {
+  margin-bottom: 50px;
+
+  @include laptop {
+    margin-bottom: 38px;
+  }
+
+  @include tablet {
+    margin-bottom: 30px;
+  }
+
+  @include mobile {
+    margin-bottom: 20px;
+  }
+
+  // .navigation__container
+
+  &__container {
+  }
+
+  // .navigation__gender
+
+  &__gender {
+  }
+
+  // .navigation__category
+
+  &__category {
+  }
+}
+
+

@@ -1,0 +1,10 @@
+.footer-copyright {
+  &__text {
+    font-size: 12px;
+    line-height: 1.3;
+
+    @include tablet {
+      font-size: 10px;
+    }
+  }
+}
