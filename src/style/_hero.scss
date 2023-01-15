@@ -30,19 +30,19 @@
     }
   }
 
-  &_man {
-    background-image: url('../img/bg-man.jpg');
+  &_men {
+    background-image: url('../img/bg-men.jpg');
 
     @include laptop {
-      background-image: url('../img/bg-man-laptop.jpg');
+      background-image: url('../img/bg-men-laptop.jpg');
     }
 
     @include tablet {
-      background-image: url('../img/bg-man-tablet.jpg');
+      background-image: url('../img/bg-men-tablet.jpg');
     }
 
     @include mobile {
-      background-image: url('../img/bg-man-mobile.jpg');
+      background-image: url('../img/bg-men-mobile.jpg');
     }
   }
 
