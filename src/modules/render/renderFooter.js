@@ -109,7 +109,7 @@ export const renderFooter = () => {
     
     createElement('li', {
       className: 'footer-category__item',
-      href: `#${genderName}`,
+      href: `/${genderName}`,
     }, {
       parent: categoryList,
       children: [

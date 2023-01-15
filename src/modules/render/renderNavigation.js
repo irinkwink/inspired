@@ -2,9 +2,13 @@ import { DATA } from "../const";
 import { createElement } from "../createElement";
 
 
-export const renderNavigation = (gender, category) => {
-  const navigation = document.querySelector('.navigation');
-  navigation.innerHTML = '';
+export const renderNavigation = (main, gender, category) => {
+  console.log('genderInNavigation: ', gender);
+  const navigation = createElement('nav', {
+    className: 'navigation',
+  }, {
+    parent: main,
+  });
 
   const container = createElement('div', {
     className: 'container navigation__container',
@@ -44,6 +48,7 @@ export const renderNavigation = (gender, category) => {
     )
   }
 
+  console.log('DATA: ', DATA);
   DATA.navigation[gender].list.forEach(categoryItem => {
     createElement('a',
       {

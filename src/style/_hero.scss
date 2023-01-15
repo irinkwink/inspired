@@ -100,8 +100,15 @@
     }
 
     &:hover {
+      background-color: $color-gray;
+    }
+
+    &:active {
       background-color: $color-gray-dark;
-      border-color: $color-gray-dark;
+    }
+
+    &:disabled {
+      background-color: $color-gray-light;
     }
   }
 }

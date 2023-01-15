@@ -20,6 +20,7 @@ module.exports = {
       },
     },
     hot: true,
+    // historyApiFallback: true,
   },
   entry: path.resolve(__dirname, 'src', 'index.js'),
   output: {

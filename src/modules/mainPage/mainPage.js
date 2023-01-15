@@ -4,14 +4,16 @@ import { renderNavigation } from "../render/renderNavigation";
 import { renderProducts } from "../render/renderProducts";
 
 export const mainPage = (gender = 'women', category = '') => {
-  renderNavigation(gender, category);
-  renderHero(gender, category);
+  const main = document.querySelector('.main');
+  main.innerHTML = '';
+  renderNavigation(main, gender, category);
 
   if (category) {
     const categoryData = DATA.navigation[gender].list.find((item) => item.slug === category)
-    renderProducts(categoryData.title, { gender, category});
+    renderProducts(main, categoryData.title, { gender, category});
   } else {
-    renderProducts('Новинки', { gender });
+    renderHero(main, gender);
+    renderProducts(main, 'Новинки', { gender });
   }
   
 }

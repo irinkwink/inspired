@@ -10,11 +10,15 @@ import { menMainPage } from './modules/mainPage/menMainPage';
 import { getData } from './modules/getData';
 import { API_URL, DATA } from './modules/const';
 import { createCssColors } from './modules/createCssColors';
+import { productPage } from './modules/productPage/productPage';
+import { loadLSData } from './modules/localStorage';
 
 const init = async () => {
   DATA.navigation = await getData(`${API_URL}/api/categories`);
   console.log('DATA.navigation: ', DATA.navigation);
   DATA.colors = await getData(`${API_URL}/api/colors`);
+
+  loadLSData();
 
   createCssColors(DATA.colors);
 
@@ -41,6 +45,14 @@ const init = async () => {
 
   router.on('men/:category', ({ data }) => {
     menMainPage(data.category);
+  })
+
+  router.on('women/product/:id', ({ data }) => {
+    productPage('women', data.id);
+  })
+
+  router.on('men/product/:id', ({ data }) => {
+    productPage('men', data.id);
   })
   
   router.resolve();
