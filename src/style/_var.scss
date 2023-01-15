@@ -4,10 +4,16 @@ $color-gray-light: #DCDCDC;
 $color-gray: #8A8A8A;
 $color-gray-dark: #404040;
 
-
+$desktop: 1500px;
 $laptop: 1024px;
 $tablet: 768px;
 $mobile: 540px;
+
+@mixin desktop {
+  @media (max-width: #{$desktop}) {
+    @content;
+  }
+}
 
 @mixin laptop {
   @media (max-width: #{$laptop}) {

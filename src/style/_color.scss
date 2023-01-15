@@ -19,24 +19,4 @@
     border-radius: 50%;
     transform: translate(-50%, -50%);
   }
-
-
-  &_white {
-    &::after {
-      background-color: white;
-      border: 1px solid $color-main;
-    }
-  }
-
-  &_red {
-    &::after {
-      background-color: red;
-    }
-  }
-
-  &_black {
-    &::after {
-      background-color: black;
-    }
-  }
 }

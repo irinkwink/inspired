@@ -1,42 +1,9 @@
+import { DATA } from "../const";
 import { createElement } from "../createElement";
-import { dataNavigation } from "../navigation";
 
 const categoryList = createElement('ul', {
   className: 'footer-category__list',
 });
-
-for (let genderName in dataNavigation) {
-  createElement('li', {
-    className: 'footer-category__item',
-    href: `#${genderName}`,
-  }, {
-    parent: categoryList,
-    children: [
-      createElement('h3',
-      {
-        className: 'footer-category__subtitle',
-        innerHTML: `
-          <a class="footer__link" href="#${genderName}">${dataNavigation[genderName].title}</a>
-        `
-      }),
-      createElement('ul',
-      {
-        className: 'footer-category__sublist',
-      },
-      {
-        children: dataNavigation[genderName].list.map(category => {
-          return createElement('li',
-            {
-              className: 'footer-category__subitem',
-              innerHTML: `
-              <a class="footer__link" href="#${genderName}/${category.slug}">${category.title}</a>
-              `
-            })
-        })
-      }),
-    ]
-  })
-}
 
 const category = createElement('div',
   {
@@ -136,6 +103,41 @@ const container = createElement('div',
 
 export const renderFooter = () => {
   const footer = document.querySelector('.footer');
+  categoryList.innerHTML = '';
+
+  for (let genderName in DATA.navigation) {
+    
+    createElement('li', {
+      className: 'footer-category__item',
+      href: `#${genderName}`,
+    }, {
+      parent: categoryList,
+      children: [
+        createElement('h3',
+        {
+          className: 'footer-category__subtitle',
+          innerHTML: `
+            <a class="footer__link" href="#/${genderName}">${DATA.navigation[genderName].title}</a>
+          `
+        }),
+        createElement('ul',
+        {
+          className: 'footer-category__sublist',
+        },
+        {
+          children: DATA.navigation[genderName].list.map(category => {
+            return createElement('li',
+              {
+                className: 'footer-category__subitem',
+                innerHTML: `
+                <a class="footer__link" href="#/${genderName}/${category.slug}">${category.title}</a>
+                `
+              })
+          })
+        }),
+      ]
+    })
+  }
 
   footer.append(container);
 }

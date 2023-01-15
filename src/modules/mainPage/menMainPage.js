@@ -1,5 +1,5 @@
 import { mainPage } from "./mainPage"
 
-export const menMainPage = () => {
-  mainPage('men')
+export const menMainPage = (category) => {
+  mainPage('men', category)
 }

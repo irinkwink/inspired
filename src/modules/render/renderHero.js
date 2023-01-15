@@ -1,56 +1,50 @@
+import { HERO_CONTENT } from "../const";
 import { createElement } from "../createElement";
 
-const content = {
-  women: 
-    {
-      title: 'Новая коллекция Бюстгальтер-балконет',
-      link: 'bras'
-    }, 
-  men:
-    {
-      title: 'Боксеры из новой коллекции',
-      link: 'underwear',
-    }
-};
+const container = createElement('div',
+  {
+    className: 'container',
+  },
+);
 
-export const renderHero = (gender) => {
+const content = createElement('div',
+  {
+    className: 'hero__content',
+  },
+  {
+    parent: container,
+  }
+);
+
+const title = createElement('h2',
+  {
+    className: 'hero__title',
+  },
+  {
+    parent: content,
+  }
+);
+
+const link = createElement('a',
+  {
+    className: 'hero__link',
+    textContent: 'Перейти',
+  },
+  {
+    parent: content,
+  }
+);
+
+export const renderHero = (gender, category) => {
   const hero = document.querySelector('.hero');
-  hero.innerHTML = '';
+  hero.append(container);
 
-  if (gender) {
+  if (category) {
+    hero.style.display = 'none';
+  } else {
     hero.style.display = '';
     hero.className = `hero hero_${gender}`;
-    createElement('div',
-      {
-        className: 'container',
-      },
-      {
-        parent: hero,
-        child: createElement('div',
-          {
-            className: 'hero__content',
-          },
-          {
-            children: [
-              createElement('h2',
-                {
-                  className: 'hero__title',
-                  textContent: content[gender].title,
-                }
-              ),
-              createElement('a',
-              {
-                className: 'hero__link',
-                href: `#${gender}/${content[gender].link}`,
-                textContent: 'Перейти',
-              }
-            )
-            ]
-          }
-        )
-      }
-    );
-  } else {
-    hero.style.display = 'none';
+    title.textContent = HERO_CONTENT[gender].title;
+    link.href = `#product/${HERO_CONTENT[gender].id}`;
   }
 }

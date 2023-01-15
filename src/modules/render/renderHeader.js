@@ -43,10 +43,20 @@ const container = createElement('div',
     className: 'container header__container',
     innerHTML: `
       <a href="tel:89304902620" class="header__phone header__link">8 930 490 26 20</a>
-      <a href="/">
-        <img class="header__logo" src="${logo}" alt="Логотип Inspired">
-      </a>
     `
+  }
+);
+
+createElement('a',
+  {
+    className: 'header__logo',
+    href: '/#',
+    innerHTML: `
+      <img class="header__logo" src="${logo}" alt="Логотип Inspired">
+    `
+  },
+  {
+    parent: container,
   }
 );
 

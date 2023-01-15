@@ -1,136 +1,43 @@
 import photo from '../../img/product01.jpg';
+import { API_URL, DATA } from '../const';
+import { createElement } from '../createElement';
+import { getData } from '../getData';
+import { renderProduct } from './renderProduct';
 
-export const renderProducts = () => {
+export const renderProducts = async(title, params) => {
+  console.log('params: ', params);
   const products = document.querySelector('.products');
+  products.innerHTML = '';
 
+  const data = await getData(`${API_URL}/api/goods`, params);
+  console.log('data: ', data);
+  const productsData = 'goods' in data ? data.goods : data;
+  const totalCount = 'totalCount' in data ? data.totalCount : 0;
+  console.log('productsData: ', productsData);
+   
 
-
-  products.innerHTML = `
-    <div class="container">
-      <h2 class="products__title">Новинки</h2>
-      <ul class="products__list">
-        <li class="products__item">
-          <article class="product">
-            <a href="#" class="product__link">
-              <img src="${photo}" alt="Бюстгальтер-Балконет Paris из Переработанной Микрофибры" class="product__image">
-              <h3 class="product__title">Бюстгальтер-Балконет Paris из Переработанной Микрофибры</h3>
-            </a>
-            <div class="product__row">
-              <p class="product__price">руб 2299</p>
-              <button class="product__btn-favorite" aria-label="Добавить в избранное">
-              </button>
-            </div>
-            <ul class="product__color-list">
-              <li class="product__color-item">
-                <div class="color color_white"></div>
-              </li>
-              <li class="product__color-item">
-                <div class="color color_red color_check"></div>
-              </li>
-              <li class="product__color-item">
-                <div class="color color_black"></div>
-              </li>
-            </ul>
-          </article>
-        </li>
-        <li class="products__item">
-          <article class="product">
-            <a href="#" class="product__link">
-              <img src="${photo}" alt="Бюстгальтер-Балконет Paris из Переработанной Микрофибры" class="product__image">
-              <h3 class="product__title">Бюстгальтер-Балконет Paris из Переработанной Микрофибры</h3>
-            </a>
-            <div class="product__row">
-              <p class="product__price">руб 2299</p>
-              <button class="product__btn-favorite" aria-label="Добавить в избранное">
-              </button>
-            </div>
-            <ul class="product__color-list">
-              <li class="product__color-item">
-                <div class="color color_white"></div>
-              </li>
-              <li class="product__color-item">
-                <div class="color color_red color_check"></div>
-              </li>
-              <li class="product__color-item">
-                <div class="color color_black"></div>
-              </li>
-            </ul>
-          </article>
-        </li>
-        <li class="products__item">
-          <article class="product">
-            <a href="#" class="product__link">
-              <img src="${photo}" alt="Бюстгальтер-Балконет Paris из Переработанной Микрофибры" class="product__image">
-              <h3 class="product__title">Бюстгальтер-Балконет Paris из Переработанной Микрофибры</h3>
-            </a>
-            <div class="product__row">
-              <p class="product__price">руб 2299</p>
-              <button class="product__btn-favorite" aria-label="Добавить в избранное">
-              </button>
-            </div>
-            <ul class="product__color-list">
-              <li class="product__color-item">
-                <div class="color color_white"></div>
-              </li>
-              <li class="product__color-item">
-                <div class="color color_red color_check"></div>
-              </li>
-              <li class="product__color-item">
-                <div class="color color_black"></div>
-              </li>
-            </ul>
-          </article>
-        </li>
-        <li class="products__item">
-          <article class="product">
-            <a href="#" class="product__link">
-              <img src="${photo}" alt="Бюстгальтер-Балконет Paris из Переработанной Микрофибры" class="product__image">
-              <h3 class="product__title">Бюстгальтер-Балконет Paris из Переработанной Микрофибры</h3>
-            </a>
-            <div class="product__row">
-              <p class="product__price">руб 2299</p>
-              <button class="product__btn-favorite" aria-label="Добавить в избранное">
-              </button>
-            </div>
-            <ul class="product__color-list">
-              <li class="product__color-item">
-                <div class="color color_white"></div>
-              </li>
-              <li class="product__color-item">
-                <div class="color color_red color_check"></div>
-              </li>
-              <li class="product__color-item">
-                <div class="color color_black"></div>
-              </li>
-            </ul>
-          </article>
-        </li>
-        <li class="products__item">
-          <article class="product">
-            <a href="#" class="product__link">
-              <img src="${photo}" alt="Бюстгальтер-Балконет Paris из Переработанной Микрофибры" class="product__image">
-              <h3 class="product__title">Бюстгальтер-Балконет Paris из Переработанной Микрофибры</h3>
-            </a>
-            <div class="product__row">
-              <p class="product__price">руб 2299</p>
-              <button class="product__btn-favorite" aria-label="Добавить в избранное">
-              </button>
-            </div>
-            <ul class="product__color-list">
-              <li class="product__color-item">
-                <div class="color color_white"></div>
-              </li>
-              <li class="product__color-item">
-                <div class="color color_red color_check"></div>
-              </li>
-              <li class="product__color-item">
-                <div class="color color_black"></div>
-              </li>
-            </ul>
-          </article>
-        </li>
-
-      </ul>
-    </div>
-  `;
+  createElement('div',
+    {
+      className: 'container',
+    },
+    {
+      parent: products,
+      children:[
+        createElement('h2',
+          {
+            className: 'products__title',
+            innerHTML: `${title}${totalCount ? `<sup> (${totalCount})</sup>` : ''}`,
+          }
+        ),
+        createElement('ul',
+          {
+            className: 'products__list'
+          },
+          {
+            children: productsData.map(renderProduct),
+          }
+        )
+      ],
+    }
+  );
 }

@@ -1,8 +1,8 @@
+import { DATA } from "../const";
 import { createElement } from "../createElement";
-import { dataNavigation } from "../navigation";
 
 
-export const renderNavigation = (gender) => {
+export const renderNavigation = (gender, category) => {
   const navigation = document.querySelector('.navigation');
   navigation.innerHTML = '';
 
@@ -24,12 +24,12 @@ export const renderNavigation = (gender) => {
     parent: container,
   });
 
-  for (let genderName in dataNavigation) {
+  for (let genderName in DATA.navigation) {
     createElement('a',
       {
         className: `gender__link ${genderName === gender ? 'gender__link_active' : ''}`,
-        href: `#${genderName}`,
-        textContent: dataNavigation[genderName].title,
+        href: `#/${genderName}`,
+        textContent: DATA.navigation[genderName].title,
       },
       {
         parent: createElement('li',
@@ -44,12 +44,12 @@ export const renderNavigation = (gender) => {
     )
   }
 
-  dataNavigation[gender].list.forEach(category => {
+  DATA.navigation[gender].list.forEach(categoryItem => {
     createElement('a',
       {
-        className: 'category__link',
-        href: `#${gender}/${category.slug}`,
-        textContent: category.title,
+        className: `category__link ${category === categoryItem.slug ? 'category__link_active' : ''}`,
+        href: `#/${gender}/${categoryItem.slug}`,
+        textContent: categoryItem.title,
       },
       {
         parent: createElement('li',
@@ -59,15 +59,7 @@ export const renderNavigation = (gender) => {
           {
             parent: categoryList,
           }
-        ),
-        cb(elem) {
-          elem.addEventListener('click', () => {
-            document.querySelector('.category__link_active')
-            ?.classList.remove('category__link_active');
-
-            elem.classList.add('category__link_active');
-          })
-        }
+        )
       }
     )
   });
